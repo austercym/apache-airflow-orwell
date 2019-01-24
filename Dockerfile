@@ -1,5 +1,5 @@
 FROM puckel/docker-airflow
 
-WORKDIR /script
+#WORKDIR /script
 
-COPY . /usr/local/airflow     
+COPY scripts/* /usr/local/airflow     
