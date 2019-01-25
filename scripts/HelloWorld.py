@@ -1,8 +1,9 @@
-
 from datetime import timedelta
 import airflow
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
+from airflow.operators.python_operator import PythonOperator
+from modules import getweather, config as C
 
 # Following are defaults which can be overridden later on
 default_args = {
@@ -54,11 +55,10 @@ templated_command = """
 {% endfor %}
 """
 
-t3 = BashOperator(
+t3 = PythonOperator(
     task_id='templated',
     depends_on_past=False,
-    bash_command=templated_command,
-    params={'my_param': 'Parameter I passed in'},
+    python_callable=getweather.get_weather(),    
     dag=dag,
 )
 
