@@ -1,5 +1,8 @@
 FROM puckel/docker-airflow
 
-#WORKDIR /script
+WORKDIR /script
 
-COPY scripts/* /usr/local/airflow     
+COPY . /usr/local/airflow/dags     
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
